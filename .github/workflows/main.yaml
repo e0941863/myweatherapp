@@ -44,8 +44,8 @@ jobs:
     # https://github.com/marketplace/actions/deploy-to-heroku
     - name: Deploy to HEROKU
       uses: akhileshns/heroku-deploy@v3.12.12
-        with: 
-          heroku_api_key: ${{secrets.HEROKU_KEY}}
-          heroku_app_name: ${{HEROKU_APP_NAME"}} #Must be unique in Heroku
-          heroku_email: ${{EMAIL}}
-          branch: ${{github.ref_name}} #release branch
+      with: 
+        heroku_api_key: ${{secrets.HEROKU_KEY}}
+        heroku_app_name: ${{HEROKU_APP_NAME"}} #Must be unique in Heroku
+        heroku_email: ${{EMAIL}}
+        branch: ${{github.ref_name}} #release branch
