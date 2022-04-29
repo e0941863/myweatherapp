@@ -1,6 +1,8 @@
 name: My First Workflow
 on:
   push: 
+    branches: 
+      "release"
 jobs:
   echo_the_date:
     runs-on: ubuntu-latest
@@ -13,7 +15,8 @@ jobs:
   test_and_deploy:
     runs-on: ubuntu-latest
     # add api key in github, see below steps @mvn clean test
-    env:
+    # envirnomental variable
+    env: 
       OPENWEATHERMAP_KEY: ${{secrets.OPENWEATHERMAP_API_KEY}}
     steps:
     # https://github.com/marketplace/actions/setup-java-jdk
@@ -37,4 +40,12 @@ jobs:
       run: mvn clean test
       # cannot run cos we did not set the API key
       # add in github, setting, secret, action, add secret, copy the key
-      
+    
+    # https://github.com/marketplace/actions/deploy-to-heroku
+    - name: Deploy to HEROKU
+      uses: akhileshns/heroku-deploy@v3.12.12
+        with: 
+          heroku_api_key: ${{secrets.HEROKU_KEY}}
+          heroku_app_name: ${{HEROKU_APP_NAME"}} #Must be unique in Heroku
+          heroku_email: ${{EMAIL}}
+          branch: ${{github.ref_name}} #release branch
