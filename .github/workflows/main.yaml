@@ -12,6 +12,9 @@ jobs:
 
   test_and_deploy:
     runs-on: ubuntu-latest
+    # add api key in github, see below steps @mvn clean test
+    env:
+      OPENWEATHERMAP_API_KEY: ${{secrets.OPENWEATHERMAP_API_KEY}}
     steps:
     # https://github.com/marketplace/actions/setup-java-jdk
     - name: Setup DJK 17
@@ -32,4 +35,6 @@ jobs:
 
     - name: Run test
       run: mvn clean test
+      # cannot run cos we did not set the API key
+      # add in github, setting, secret, action, add secret, copy the key
       
